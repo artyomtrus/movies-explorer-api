@@ -5,11 +5,11 @@ const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const errorHandler = require('./middlewares/error-handler');
-const router = require('./routes/index');
+const router = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const limiter = require('./utils/limiter');
 
-const { PORT = 3000, DB_ADDRESS = 'mongodb://localhost:27017/moviesdb' } = process.env;
+const { PORT = 3000, DB_ADDRESS } = process.env;
 
 const allowedCors = [
   'https://filmopoisk.trus.nomoredomains.icu/',

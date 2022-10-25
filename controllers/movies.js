@@ -4,14 +4,15 @@ const BadRequestError = require('../errors/bad-request-error');
 const IncorrectUser = require('../errors/incorrect-user');
 
 const getMovies = (req, res, next) => {
-  Movie.find({})
-    .then((card) => {
-      res.send({ data: card });
+  Movie.find({ owner: req.user._id })
+    .then((movie) => {
+      res.send({ data: movie });
     })
     .catch(next);
 };
 
 const deleteMovies = (req, res, next) => {
+  console.log(req.params);
   Movie.findById(req.params.movieId)
     .orFail(new NotFoundError('Карточка с указанным фильмом не найдена.'))
     .then((movie) => {
@@ -32,31 +33,8 @@ const deleteMovies = (req, res, next) => {
 };
 
 const createMovies = (req, res, next) => {
-  const {
-    country,
-    director,
-    duration,
-    year,
-    description,
-    image,
-    trailerLink,
-    thumbnail,
-    movieId,
-    nameRU,
-    nameEN,
-  } = req.body;
   Movie.create({
-    country,
-    director,
-    duration,
-    year,
-    description,
-    image,
-    trailerLink,
-    thumbnail,
-    movieId,
-    nameRU,
-    nameEN,
+    ...req.body,
     owner: req.user._id,
   })
     .then((movie) => {
@@ -69,38 +47,6 @@ const createMovies = (req, res, next) => {
       return next(err);
     });
 };
-
-// const putLike = (req, res, next) => {
-//   Card.findByIdAndUpdate(
-//     req.params.cardId,
-//     { $addToSet: { likes: req.user._id } },
-//     { new: true },
-//   )
-//     .orFail(new NotFoundError('Передан несуществующий _id карточки.'))
-//     .then((card) => res.send({ data: card }))
-//     .catch((err) => {
-//       if (err.name === 'CastError') {
-//         return next(new BadRequestError('Переданы некорректные данные при постановке лайка.'));
-//       }
-//       return next(err);
-//     });
-// };
-//
-// const deleteLike = (req, res, next) => {
-//   Card.findByIdAndUpdate(
-//     req.params.cardId,
-//     { $pull: { likes: req.user._id } },
-//     { new: true },
-//   )
-//     .orFail(new NotFoundError('Передан несуществующий _id карточки.'))
-//     .then((card) => res.send({ data: card }))
-//     .catch((err) => {
-//       if (err.name === 'CastError') {
-//         return next(new BadRequestError('Переданы некорректные данные при снятии лайка'));
-//       }
-//       return next(err);
-//     });
-// };
 
 module.exports = {
   getMovies,

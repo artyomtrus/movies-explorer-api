@@ -40,13 +40,18 @@ const createUser = (req, res, next) => {
 };
 
 const refreshUser = (req, res, next) => {
-  const { name } = req.body;
-  User.findByIdAndUpdate(req.user._id, { name }, {
+  const { name, email } = req.body;
+  console.log({ data: email });
+  console.log(req.body);
+  User.findByIdAndUpdate(req.user._id, { name, email }, {
     new: true,
     runValidators: true,
   })
     .then((user) => res.send({ data: user }))
     .catch((err) => {
+      if (err.code === 11000) {
+        return next(new ConflictEmailError('Пользователь с таким email уже создан'));
+      }
       if (err.name === 'ValidationError') {
         return next(new BadRequestError('Переданы некорректные данные при обновлении профиля'));
       }
