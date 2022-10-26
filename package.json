@@ -1,0 +1,42 @@
+{
+  "name": "diplom-artyomtrus",
+  "version": "1.0.0",
+  "description": "diploma yandex-practicum",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "lint": "npx eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://https://github.com/artyomtrus/movies-explorer-api"
+  },
+  "keywords": [],
+  "author": "ArtemTrus",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/artyomtrus/"
+  },
+  "homepage": "https://github.com/artyomtrus/",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
+    "celebrate": "^15.0.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.1",
+    "express-rate-limit": "^6.6.0",
+    "express-winston": "^4.2.0",
+    "helmet": "^6.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.6.0",
+    "validator": "^13.7.0",
+    "winston": "^3.8.2"
+  },
+  "devDependencies": {
+    "eslint": "8.22.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "nodemon": "^2.0.19"
+  }
+}
