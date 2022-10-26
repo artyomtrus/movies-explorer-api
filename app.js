@@ -8,8 +8,9 @@ const errorHandler = require('./middlewares/error-handler');
 const router = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const limiter = require('./utils/limiter');
+const DEV_ADDRESS = require('./utils/config');
 
-const { PORT = 3000, DB_ADDRESS } = process.env;
+const { PORT = 3000, NODE_ENV, DB_ADDRESS } = process.env;
 
 const allowedCors = [
   'https://filmopoisk.trus.nomoredomains.icu/',
@@ -41,7 +42,7 @@ app.use((req, res, next) => {
 
 app.use(limiter);
 
-mongoose.connect(DB_ADDRESS, {
+mongoose.connect(NODE_ENV === 'production' ? DB_ADDRESS : DEV_ADDRESS, {
   useNewUrlParser: true,
 });
 
