@@ -5,8 +5,8 @@ const IncorrectUser = require('../errors/incorrect-user');
 
 const getMovies = (req, res, next) => {
   Movie.find({ owner: req.user._id })
-    .then((movie) => {
-      res.send({ data: movie });
+    .then((data) => {
+      res.send(data);
     })
     .catch(next);
 };
