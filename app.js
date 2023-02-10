@@ -13,8 +13,8 @@ const DEV_ADDRESS = require('./utils/config');
 const { PORT = 3000, NODE_ENV, DB_ADDRESS } = process.env;
 
 const allowedCors = [
-  'https://filmopoisk.trus.nomoredomains.icu/',
-  'http://filmopoisk.trus.nomoredomains.icu/',
+  'http://filmopoisk.trus.nomoredomainsclub.ru',
+  'https://filmopoisk.trus.nomoredomainsclub.ru',
 ];
 
 const app = express();
@@ -28,7 +28,6 @@ app.use((req, res, next) => {
   const { method } = req;
   const requestHeaders = req.headers['access-control-request-headers'];
   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
-
   if (allowedCors.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
   }
