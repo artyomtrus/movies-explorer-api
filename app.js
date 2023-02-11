@@ -13,8 +13,8 @@ const DEV_ADDRESS = require('./utils/config');
 const { PORT = 3000, NODE_ENV, DB_ADDRESS } = process.env;
 
 const allowedCors = [
-  'http://filmopoisk.trus.nomoredomainsclub.ru',
-  'https://filmopoisk.trus.nomoredomainsclub.ru',
+  'http://filmopoisk.atrus.nomoredomainsclub.ru',
+  'https://filmopoisk.atrus.nomoredomainsclub.ru',
 ];
 
 const app = express();
